@@ -3,4 +3,4 @@ class projectile:
         self.xpos = xpos
         self.ypos = ypos
         self.isAlive = False
-def move
+#def move

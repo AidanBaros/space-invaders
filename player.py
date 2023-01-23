@@ -1,65 +1,31 @@
 import pygame
-pygame.init()
-pygame.display.set_caption("Bootleg Space invaders")
-ScreenWidth = 800
-ScreenHeight = 800
-screen = pygame.display.set_mode((ScreenWidth,ScreenHeight))
-clock = pygame.time.Clock()
-green = (0, 255,0)
+#o,[prt]
 
+class Player(pygame.sprite.Sprite):
+    def __init__(self, pos):
+        super().__init__()
 
-player = pygame.image.load('Player.png') #load your spritesheet
-player.set_colorkey((255,0,255))
+        self.image = pygame.Surface((32,64))
+        self.image.fill((18,122,89))
+        self.rect = self.image.get_rect(center = pos)
 
-frameWidth = 70
-frameHeight = 50
-RowNum = 0
-frameNum = 0
-doExit = False
-Px = 0
-Py = 700
-Vx = 0
-#constants
-LEFT = 0
-RIGHT = 1
-keys = [False, False]
-while not doExit:
-    clock.tick(60)
-    
-    for event in pygame.event.get(): #quit game if x is pressed on top corner
-        if event.type == pygame.QUIT:
-            gameover = True
-      
-        if event.type == pygame.KEYDOWN: #keyboard input
-            if event.key == pygame.K_LEFT:
-                keys[LEFT]=True
-            elif event.key == pygame.K_RIGHT:
-                keys[RIGHT]=True
+        self.lives = 3
+        self.pos = pygame.math.Vector2(self.rect.center)
 
-            
-        if event.type == pygame.KEYUP: #keyboard input
-            if event.key == pygame.K_LEFT:
-                keys[LEFT]=False
-            elif event.key == pygame.K_RIGHT:
-                keys[RIGHT]=False
-                
-    #left movement            
-    if keys[LEFT]==True:
-        Vx = -5
-        direction = LEFT
-        
-    #Right Movement
-    elif keys[RIGHT]==True:
-        Vx = 5
-        direction = RIGHT
-        
-    else:
-        Vx = 0
-    #updating player
-    Px += Vx
-    
-    screen.fill((0,0,0))
-    #pygame.draw.rect(screen, (green), (Px, Py, 70, 50))
-    screen.blit(player, (Px, Py), (frameWidth*frameNum, RowNum*frameHeight, frameWidth, frameHeight))
-    pygame.display.flip()
-pygame.quit()
+        self.display_surface = pygame.display.get_surface()
+
+    def update(self):
+        keys = pygame.key.get_pressed()
+        self.draw()
+
+        if keys[pygame.K_a]:
+            self.pos.x -= 10
+        if keys[pygame.K_SPACE]:#and condition for projectile cooldown
+            pass
+            #fire projectile here
+        elif keys[pygame.K_d]:
+            self.pos.x += 10
+        else:
+            pass
+    def draw(self):
+        pygame.draw(self.display_surface, self.rect)

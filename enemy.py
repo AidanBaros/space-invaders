@@ -9,7 +9,7 @@ class Enemy():
 
         self.pos = ()
 
-        self.hitbox = (64,64)
+        self.hitbox = pygame.Rect(self.pos[0], self.pos[1], 64,64)
         self.distancebox = (80,80)
 
 
@@ -34,6 +34,6 @@ class octo(Enemy):
     def __init__(self):
         super().__init__()
 
-class sauser(Enemy):
+class UFO(Enemy):
     def __init__(self):
         super().__init__()

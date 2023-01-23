@@ -1,18 +1,20 @@
 import pygame
 from enemy import *
-from player import *
+from player import Player
 from projectile import *
 #PLEase import_programs == (pygame) 🙏🙏😌
 
 #startup - - - -
 pygame.init()
 pygame.display.set_caption("Bootleg Space Invaders")  # sets the window title
-screen = pygame.display.set_mode((0, 0), 1500,1000)
-screen.fill((0,0,0))
+screen = pygame.display.set_mode((1500,1000))
+screen.fill((10,80,110))
 #for a game like this i dont think we should do fullscreen, it would just be easier to do a set size
 gameover = False #variable to run our game loop
 enemyList = []
 projectileList = []
+
+player = Player((100,100))
 
 for i in range(0,5,1):
     for a in range (0,19,1):
@@ -24,8 +26,10 @@ for i in range(0,4,1):
 
 
 while not gameover: #GAME LOOP############################################################
-    clock.tick(60)      #FPS  why they do that???? hiw is it vertical
-                        #wdym? i just put the 60 in ⁐s
+    print("test")
+    #pygame.clock.tick(60)
+
+    player.update()
 #render 
 
 for enemy in enemyList:
