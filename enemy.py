@@ -1,7 +1,7 @@
 import pygame
 
 class Enemy():
-    def __init__(self,):
+    def __init__(self,pos: pygame.math.Vector2,sprite: pygame.image):
         self.alive = True
         self.screen = pygame.display.get_surface()
 
@@ -19,11 +19,9 @@ class Enemy():
     def collide(self, projectile:pygame.Rect, enemyList, Listposition, position):
         if projectile.colliderect(self.hitbox):
             self.alive = False
-        
-        
 
 class skull(Enemy):
-    def __init__(self):
+    def __init__(self,pos):
         super().__init__()
 
 class crab(Enemy):
