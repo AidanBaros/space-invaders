@@ -1,45 +1,61 @@
 import pygame
 
-class Player():
-    def __init__(self,screen:pygame.surface):
+
+class Player:
+    def __init__(
+        self,
+        screen: pygame.Surface,
+        screenSize: tuple[int, int],
+        size_multiplyer,
+    ):
         self.screen = screen
-        self.lives = 3
-        self.pos = ()
 
-    def update(self):
-        pass
-    def draw(self):
-        pass
+        self.screenSize = screenSize
 
+        self.player_x = 50*size_multiplyer
+        self.player_y = 50*size_multiplyer
 
+        self.rect = pygame.Rect(
+            self.screenSize[0] // 2 - (self.player_x/2), self.screenSize[1] - (200*size_multiplyer + self.player_x), self.player_x, self.player_y
+        )
+        self.hitbox = self.rect.copy()
+        self.image = pygame.transform.scale(pygame.image.load(f"images/player.png"),(self.player_x,self.player_y))
 
-
-
-
-
-
-"""
-self.image = pygame.Surface((32,64))
-        self.image.fill((18,122,89))
-        #self.rect = self.image.get_rect(center = pos)
-        self.rect = pygame.Rect(0,0,64,64)
-        self.rect.center = pos
-
-        self.lives = 3
+        self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)
+        self.speed = 10
 
-        self.display_surface = pygame.display.get_surface()
+        self.lives = 3
 
-keys = pygame.key.get_pressed()
-        self.draw()
+    def input(self):
+        keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_a]:
-            self.pos.x -= 10
-        if keys[pygame.K_SPACE]:#and condition for projectile cooldown
-            pass
-            #fire projectile here
-        elif keys[pygame.K_d]:
-            self.pos.x += 10
+        if keys[pygame.K_a] and self.hitbox.left >= 0:
+            self.direction.x = -1
+            # self.status = "left"
+        elif keys[pygame.K_d] and self.hitbox.right <= self.screenSize[0]:
+            self.direction.x = 1
+            # self.status = "right"
         else:
-            pass
-"""
+            self.direction.x = 0
+
+        if keys[pygame.K_SPACE]:
+            self.attack()
+
+    def move(self,size_multiplyer):
+        self.pos.x += self.direction.x * self.speed * size_multiplyer
+        self.hitbox.centerx = round(self.pos.x)
+        self.rect.centerx = self.hitbox.centerx
+
+    def draw(self):
+        pygame.draw.rect(self.screen, (255, 0, 0), self.rect)
+        self.screen.blit(self.image,self.rect)
+
+    def attack(self):
+        
+        pass
+
+    def update(self,size_multiplyer):
+        self.input()
+        self.move(size_multiplyer)
+        self.draw()
