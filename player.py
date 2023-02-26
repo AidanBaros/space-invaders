@@ -12,14 +12,14 @@ class Player:
 
         self.screenSize = screenSize
 
-        self.player_x = 50*size_multiplyer
-        self.player_y = 50*size_multiplyer
+        self.player_x = 64*size_multiplyer
+        self.player_y = 64*size_multiplyer
 
         self.rect = pygame.Rect(
-            self.screenSize[0] // 2 - (self.player_x/2), self.screenSize[1] - (200*size_multiplyer + self.player_x), self.player_x, self.player_y
+            self.screenSize[0] // 2 - (self.player_x/2), self.screenSize[1] - (150*size_multiplyer + self.player_x), self.player_x, self.player_y
         )
         self.hitbox = self.rect.copy()
-        self.image = pygame.transform.scale(pygame.image.load(f"images/player.png"),(self.player_x,self.player_y))
+        self.image = pygame.transform.scale(pygame.image.load(f"invaders_imgs/player.png"),(self.player_x,self.player_y))
 
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)
@@ -48,7 +48,7 @@ class Player:
         self.rect.centerx = self.hitbox.centerx
 
     def draw(self):
-        pygame.draw.rect(self.screen, (255, 0, 0), self.rect)
+        #pygame.draw.rect(self.screen, (255, 0, 0), self.rect)
         self.screen.blit(self.image,self.rect)
 
     def attack(self):

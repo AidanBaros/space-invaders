@@ -20,10 +20,11 @@ list_of_barriers = []
 
 player = Player(screen, screenSize, size_multiplyer)
 
+bob = Crab((500,500),size_multiplyer)
 
 def create_barriers():
-    xpos = 224 * size_multiplyer
-    ypos = screenSize[1] - 650
+    xpos = 281 * size_multiplyer
+    ypos = screenSize[1] - 550
     for _ in range(4):
         for j in range(4):
             for i in range(4):
@@ -32,8 +33,8 @@ def create_barriers():
                 elif j == 3 and (i == 1 or i == 2):
                     pass
                 else:
-                    list_of_barriers.append(Barrier(screen,(xpos + ((50*size_multiplyer)*i),ypos+((50*size_multiplyer)*j)),size_multiplyer))
-        xpos += (224 * size_multiplyer) + (200*size_multiplyer)
+                    list_of_barriers.append(Barrier(screen,(xpos + ((32*size_multiplyer)*i),ypos+((32*size_multiplyer)*j)),size_multiplyer))
+        xpos += (281 * size_multiplyer) + (128*size_multiplyer)
             
 
 create_barriers()
@@ -53,7 +54,7 @@ while not gameover:
         blocks.update()
 
 
-
+    bob.draw()
 
     
     pygame.display.flip()

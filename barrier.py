@@ -7,7 +7,7 @@ class Barrier():
         self.health = 4
         self.pos = pos
         self.alive = True
-        self.size = 50*size_multiplyer
+        self.size = 32*size_multiplyer
 
         for i in range(3,-1,-1):
             self.image_states.append(pygame.transform.scale(pygame.image.load(f"images/barrier_{i}.png"),(self.size,self.size)))

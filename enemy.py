@@ -1,37 +1,60 @@
 import pygame
 
 class Enemy():
-    def __init__(self,pos: pygame.math.Vector2,sprite: pygame.image):
+    def __init__(
+            self,
+            pos: tuple[int,int], 
+            size_multiplyer,):
         self.alive = True
         self.screen = pygame.display.get_surface()
 
         self.screenSize = pygame.display.get_window_size()
 
-        self.pos = ()
+        self.pos:tuple[int,int] = pos
 
-        self.hitbox = pygame.Rect(self.pos[0], self.pos[1], 64,64)
+        self.x_size = 64*size_multiplyer
+        self.y_size = 64*size_multiplyer
+
+        self.hitbox = pygame.Rect(self.pos[0], self.pos[1], self.x_size,self.y_size)
         self.distancebox = (80,80)
+
+        self.image:pygame.image = None
 
 
     def draw(self):
-        pass
+        self.screen.blit(self.image,self.hitbox)
 
     def collide(self, projectile:pygame.Rect, enemyList, Listposition, position):
         if projectile.colliderect(self.hitbox):
             self.alive = False
 
-class skull(Enemy):
-    def __init__(self,pos):
-        super().__init__()
+    def move(self):
+        pass
+    
+    def update(self):
+        pass
 
-class crab(Enemy):
-    def __init__(self):
-        super().__init__()
+class Skull(Enemy):
+    def __init__(self,
+            pos: tuple[int,int], 
+            size_multiplyer,):
+        super().__init__(pos: tuple[int,int], size_multiplyer)
+        self.image = pygame.transform.scale(pygame.image.load(f"invaders_imgs/yellow_1.png"),(self.x_size,self.y_size))
 
-class octo(Enemy):
-    def __init__(self):
-        super().__init__()
+class Crab(Enemy):
+    def __init__(self,
+            pos: tuple[int,int], 
+            size_multiplyer,):
+        super().__init__(pos: tuple[int,int], size_multiplyer)
+        self.image = pygame.transform.scale(pygame.image.load(f"invaders_imgs/orange_1.png"),(self.x_size,self.y_size))
 
-class UFO(Enemy):
+class Octo(Enemy):
+    def __init__(self,
+            pos: tuple[int,int], 
+            size_multiplyer,):
+        super().__init__(pos: tuple[int,int], size_multiplyer)
+        self.image = pygame.transform.scale(pygame.image.load(f"invaders_imgs/red_1.png"),(self.x_size,self.y_size))
+
+"""class UFO(Enemy):
     def __init__(self):
-        super().__init__()
+        super().__init__()"""
