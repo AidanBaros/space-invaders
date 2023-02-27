@@ -1,7 +1,7 @@
 import pygame
 
 class Barrier():
-    def __init__(self,screen:pygame.Surface,pos,size_multiplyer:float):
+    def __init__(self,screen:pygame.surface.Surface,pos,size_multiplyer:float):
         self.screen = screen
         self.image_states = []
         self.health = 4

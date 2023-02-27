@@ -4,7 +4,7 @@ import pygame
 class Player:
     def __init__(
         self,
-        screen: pygame.Surface,
+        screen: pygame.surface.Surface,
         screenSize: tuple[int, int],
         size_multiplyer,
     ):
@@ -16,7 +16,7 @@ class Player:
         self.player_y = 64*size_multiplyer
 
         self.rect = pygame.Rect(
-            self.screenSize[0] // 2 - (self.player_x/2), self.screenSize[1] - (150*size_multiplyer + self.player_x), self.player_x, self.player_y
+            self.screenSize[0] // 2 - (self.player_x/2), self.screenSize[1] - (100*size_multiplyer + self.player_x), self.player_x, self.player_y
         )
         self.hitbox = self.rect.copy()
         self.image = pygame.transform.scale(pygame.image.load(f"invaders_imgs/player.png"),(self.player_x,self.player_y))
