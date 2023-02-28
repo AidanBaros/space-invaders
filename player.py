@@ -23,7 +23,7 @@ class Player:
 
         self.direction = pygame.math.Vector2()
         self.pos = pygame.math.Vector2(self.rect.center)
-        self.speed = 10
+        self.speed = 7
 
         self.lives = 3
 

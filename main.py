@@ -17,11 +17,9 @@ projectileList = []
 size_multiplyer = screenSize[0]/1920
 
 list_of_barriers:list[Barrier] = []
-list_of_enemies:list[list[Enemy]] = []
+list_of_enemies:list[Enemy] = []
 
 player = Player(screen, screenSize, size_multiplyer)
-
-#bob = Crab((500,500),size_multiplyer)
 
 def create_barriers():
     xpos = 281 * size_multiplyer
@@ -39,16 +37,15 @@ def create_barriers():
 
 def create_enemies():
     xpos = 64 * size_multiplyer
-    ypos = 64 * size_multiplyer
+    ypos = 32 * size_multiplyer
     for j in range(5):
-        list_of_enemies.append([])
         for i in range(11):
             if j == 0:
-                list_of_enemies[j].append(Octo((xpos + ((64*size_multiplyer)*i),ypos + ((64*size_multiplyer)*j)),size_multiplyer))
+                list_of_enemies.append(Octo((xpos + ((64*size_multiplyer)*i),ypos + ((64*size_multiplyer)*j)),size_multiplyer))
             elif j <= 2:
-                list_of_enemies[j].append(Crab((xpos + ((64*size_multiplyer)*i),ypos + ((64*size_multiplyer)*j)),size_multiplyer))
+                list_of_enemies.append(Crab((xpos + ((64*size_multiplyer)*i),ypos + ((64*size_multiplyer)*j)),size_multiplyer))
             else:
-                list_of_enemies[j].append(Skull((xpos + ((64*size_multiplyer)*i),ypos + ((64*size_multiplyer)*j)),size_multiplyer))
+                list_of_enemies.append(Skull((xpos + ((64*size_multiplyer)*i),ypos + ((64*size_multiplyer)*j)),size_multiplyer))
     xpos += (281 * size_multiplyer) + (128*size_multiplyer)
             
 
@@ -70,12 +67,13 @@ while not gameover:
         blocks.update()
 
     for enemies in list_of_enemies:
-        for enemy in enemies:
-                enemy.get_list(list_of_enemies)
+        enemies.get_list(list_of_enemies)
 
     for enemies in list_of_enemies:
-        for enemy in enemies:
-                enemy.update()
+        enemies.edge_collide()
+
+    for enemies in list_of_enemies:
+        enemies.update()
 
     
     pygame.display.flip()
