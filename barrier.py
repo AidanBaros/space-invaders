@@ -9,6 +9,8 @@ class Barrier():
         self.alive = True
         self.size = 32*size_multiplyer
 
+        self.hitbox = pygame.Rect(self.pos[0],self.pos[1],self.size,self.size)
+
         for i in range(3,-1,-1):
             self.image_states.append(pygame.transform.scale(pygame.image.load(f"images/barrier_{i}.png"),(self.size,self.size)))
 
@@ -19,7 +21,7 @@ class Barrier():
 
     def draw(self):
         if self.alive:
-            self.screen.blit(self.image_states[self.health-1], self.pos)
+            self.screen.blit(self.image_states[self.health-1], self.hitbox)
 
 
     def update(self):
